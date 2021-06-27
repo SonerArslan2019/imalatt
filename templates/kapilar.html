@@ -1,0 +1,47 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block body %}
+<section class="services-area section-gap">
+    <div class="container">
+        {% if request.user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-danger, bg-success">
+                <h3>Kapı Tipleri</h3>
+                <hr>
+
+            </div>
+        </div>
+
+        <div class="filters-content">
+            <div class="row grid">
+
+
+                <div class="single-portfolio col-sm-2 all raster">
+                    <div class="relative">
+                        <div class="thumb">
+                            <a href="{% url 'home:aboutsld' %}">
+                                <div class="overlay overlay-bg"></div>
+
+                                <img class="image img-fluid" src="{% static 'img/sld.jpg' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="p-inner">
+                        <a href="{% url 'home:aboutsld' %}"><h4 class="text-info" style="text-align: center;">SLD</h4>
+                        </a>
+                    </div>
+                    <br><br><br><br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% else %}
+
+    {% endif %}
+
+    </div>
+</section>
+
+{% endblock body %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+    <section class="services-area section-gap">
+        <div class="container-fluid">
+            <div class="row" style="text-align:center;">
+                <div class="col-md-4 col-sm-3">
+                </div>
+                <div class="col-md-4 col-sm-6">
+{#                    <h5 class="list-group-item active">{{ title }}</h5><br>#}
+                    <h5 class="list-group-item active">Giris Formu</h5><br>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                {{ form.media }}
+                                <button type="submit" class="btn btn-outline-primary">Giris Yapiniz</button>
+{#                              <button type="submit" class="btn btn-outline-success" value="{{ title }}"></button>#}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

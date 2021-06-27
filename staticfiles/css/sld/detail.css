@@ -1,0 +1,32 @@
+.text-on-image {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.text-on-image img {
+    width: 100%;
+}
+
+.text-on-image .text {
+    position: absolute;
+    color: red;
+}
+
+.mechanizm-parts{
+    border: #0b0b0b solid 1px;
+    text-align: center;
+    height: 230px;
+    max-height: 230px;
+}
+.mechanizm-parts p{
+    color: blue;
+    font-weight: bold;
+}
+.mechanizm-parts img{
+    width: 60%;
+}
+
+.tab-content > div{
+    page-break-after: always !important;
+}

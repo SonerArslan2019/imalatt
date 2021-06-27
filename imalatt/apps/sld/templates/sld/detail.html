@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load  static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sld/detail.css' %}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top: -90px">
+        <div class="row">
+            <div class="col-md-12" style="display: inherit">
+                <div class="col-md-5">
+                    <a href="{% url 'home:aboutsld' %}">Ana Sayfa</a> / <a href="{% url 'home:aboutsld' %}">SLD</a> / Detay / {{ work_order.id }}
+                </div>
+                <div  class="col-md-2 offset-4">
+                    <a target="_blank" href="{% url 'sld:send_mail' id=work_order.id %}">
+                        <i class="fa fa-mail-forward">Mail Gönder</i>
+                    </a>
+                </div>
+                <div class="col-md-1"><a class="text-dark" href="javascript:printDiv('divYazdir');" >
+                    <img src="{% static 'img/yazdir.png' %}" width="30" height="30" alt="">
+                    <i>Yazdır</i>
+                </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <b style="color:black;">SLD {{ work_order.get_door_type_display }} KAYAR KAPI</b>
+            </div>
+            <div class="col-md-4" style="text-align: right;">
+                Oluşturan {% firstof work_order.user.get_full_name  work_order.user.username  %}
+                <br>
+                {{ work_order.created_time }}
+            </div>
+        </div>
+        <hr>
+    </div>
+    {% include 'sld/parts/'|add:work_order.door_type|add:'.html' %}
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript">
+        function printDiv(divName) {
+            window.print();
+        }
+        $('.nav-tabs li').click(function () {
+            $('.nav-tabs li').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
+{% endblock %}
+
+

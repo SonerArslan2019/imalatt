@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <section class="services-area section-gap">
+        <div class="container">
+            <a href="{% url 'home:aboutsld' %}">Ana Sayfa</a> / Sistem / SLD
+
+            <h1 style="text-align: center;">ATÖLYE İŞ EMRİ</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">  <h4>SLD KAYAR KAPI</h4></div>
+                <div class="col-md-6" style="text-align: right;">
+                    <a href="{% url 'sld:create' %}"><img src="{% static 'img/add-icon.png' %}" width="30" height="30" alt="">Yeni Oluştur</a><br><br></div>
+            </div>
+            <div class="card">
+                <div class="card-cody">
+
+                    <div class="table-responsive-md">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>CRM NO</th>
+                                <th>Firma</th>
+                                <th>Teslim Tarihi</th>
+                                <th>Kayıt Zamanı</th>
+                                <th>Kapı Türü</th>
+                                <th>Detaylar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for work_order in list %}
+                                <tr>
+                                    <th>{{ work_order.crm }}</th>
+                                    <td>{{work_order.company_name}}</td>
+                                    <td>{{work_order.delivery_date}}</td>
+                                    <td>{{work_order.created_time|timesince}} önce</td>
+                                    <td>{{ work_order.get_door_type_display|title }}</td>
+                                    <td><a href="{% url 'sld:detail' id=work_order.id %}" ><div class="btn btn-outline-primary btn-sm">Görüntüle</div></a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

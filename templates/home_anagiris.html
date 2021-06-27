@@ -1,0 +1,35 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block body %}
+    <section class="services-area section-gap">
+        <div class="container">
+            {% if request.user.is_authenticated %}
+                <div class="col-md-12">
+                    <br>
+                    <a href="{% url 'home:home' %}">Ana Sayfa</a> / MR30 <br><br>
+                    <h4>İşlem Türleri</h4>
+                    <hr>
+                </div>
+            {% else %}
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h3 class="alert alert-light" role="alert">Merhaba, Hoş geldiniz !</h3>
+                        <div class="container">
+                            <div><img src="{% static 'img/manzara.JPG' %}" class="img-fluid" alt="Responsive image">
+                            </div>
+                            <br>
+                        </div>
+                        <div class="alert alert-light" role="alert">Programı KULLANMAK için lütfen <a
+                                href="{% url 'user:login' %}" class="alert-link">
+                            <button type="submit" class="btn btn-danger">GİRİŞ YAPALIM</button>
+                        </a> butonundan giriş yapınız.
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+{% endblock body %}

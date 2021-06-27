@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+    <div class="alert alert-success" style="text-align:center" role="alert">Programı KULLANMAK için lütfen<a
+            href="{% url 'user:login' %}"
+            class="alert-link"><br>
+        <button type="submit" class="btn btn-outline-primary">GİRİŞ YAPALIM</button>
+    </a>
+    </div>
+
+
+{% endblock body %}
