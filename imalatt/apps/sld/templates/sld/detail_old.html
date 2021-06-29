@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load sld_calculation %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sld/detail.css' %}">
+{% endblock %}
+
+{% block body %}
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    <section class="services-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{% url 'home:aboutsld' %}">Ana Sayfa</a> / Sistem / <a href="{% url 'home:aboutsld' %}">SLD</a> / Detay / {{ work_order.id }} <br><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <b style="color:black;">SLD {{ work_order.get_door_type_display }} KAYAR KAPI</b>
+                    <div>{{ work_order.company }}</div>
+                </div>
+                <div class="col-md-4" style="text-align: right;">
+                    Oluşturan {% firstof work_order.user.get_full_name  work_order.user.username  %}
+                    <br>
+                    {{ work_order.created_time }}
+                </div>
+            </div>
+            <hr>
+        </div>
+        <section class="ftco-section">
+            <div class="container">
+                <div class="ftco-departments">
+                    <div class="row">
+                        <div class="col-md-12 nav-link-wrap">
+                            <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link ftco-animate active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">İş Emri</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 tab-wrap">
+                            <br>
+                            <div class="tab-content bg-white p-4 p-md-5 ftco-animate card" id="v-pills-tabContent">
+                                <!-- İş Emri -->
+                                <div class="tab-pane py-2 fade show active card-body " id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
+                                    <div  style="text-align: right;"><a class="text-dark" href="javascript:printDiv('divYazdir');" >
+                                        <a href="{% url 'sld:send_mail' id=work_order.id %}">
+                                            <i class="fa fa-mail-forward">Mail Gönder</i>
+                                        </a>
+                                    </a>
+                                    </div><div  style="text-align: right;"><a class="text-dark" href="javascript:printDiv('divYazdir');" >
+                                        <img src="{% static 'img/yazdir.png' %}" width="30" height="30" alt="">
+                                        <i>Yazdır</i>
+                                    </a>
+                                    </div>
+                                    <div id='divYazdir'>
+                                        {% include 'sld/parts/'|add:work_order.door_type|add:'.html' %}
+                                        {% include 'sld/parts/options_radar_activarions.html' %}
+                                        <br>
+                                        {% with rd=work_order %}
+                                            {% include 'mr30/attendant.html' %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+{% endblock %}
